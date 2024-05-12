@@ -1,0 +1,8 @@
+{
+    "cmake.configureOnOpen": false,
+    "files.associations": {
+        "string.h": "c",
+        "cerrno": "c",
+        "errno.h": "c"
+    }
+}
