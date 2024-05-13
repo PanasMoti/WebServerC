@@ -25,15 +25,15 @@ char* file_to_string(FILE* fd)
 {
     if(isNull(fd)) {
         fprintf(stderr, "file isnt open\n");
-        return "";
+        return NULL;
     }
     int len = file_len(fd);
     char* str = (char*)malloc(sizeof(char)*len);
     if (isNull(str)) {
         fprintf(stderr, "cant allocate memory\n");
-        return "";
+        return NULL;
     }
-    fgets(str, len, fd);
+    fread(str, sizeof(char), len, fd);
     return str;
 }
 
@@ -41,4 +41,17 @@ void create_absolute_path(const char *root, const char *file, char* dest)
 {
     strcpy(dest, root);
     strcat(dest, file);
+}
+
+char *read_file(const char *file)
+{
+    if(isNull(file)) return NULL;
+    FILE* fd = fopen(file, "r");
+    if(isNull(file)) {
+        fprintf(stderr, "couldn't open file %s\n", file);
+        return NULL;
+    }
+    char* str = file_to_string(fd);
+    fclose(fd);
+    return str;
 }
