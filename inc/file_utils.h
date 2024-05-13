@@ -29,4 +29,11 @@ char* file_to_string(FILE* fd);
 void create_absolute_path(const char* root, const char* file, char* dest);
 
 
+/// @brief open a file and read all of into a string  
+/// @param file the path to the file
+/// @return pointer to a string or NULL on failure
+/// @note remember to free it later
+char* read_file(const char* file);
+
+
 #endif // FILE_UTILS_H_

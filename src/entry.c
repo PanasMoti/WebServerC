@@ -27,13 +27,12 @@ int main(int argc, char** argv) {
     strcpy(index_html, root); // <- important that this is strcpy and NOT strcat because zero terminated string bullshit
     strcat(index_html, "/pages/index.html\0");
 
-    FILE* html_data = fopen(index_html, "r");
-    char response_data[BUF_SIZE];
-    fgets(response_data, BUF_SIZE, html_data);
+    char* response_data = read_file(index_html);
     printf("%s\n",response_data);
     
-    char http_header[2048] = "HTTP/1.1 200 OK\r\n\n";
-    strcat(http_header, response_data);
+    char http_request[2048] = "HTTP/1.1 200 OK\r\n\n";
+    strcat(http_request, response_data);
+    free(response_data);
 
     HTTP_Server http_server;
     init_server(&http_server, 8001);
@@ -41,7 +40,7 @@ int main(int argc, char** argv) {
     int client_socket;
     while (1) {
         client_socket = accept(http_server.socket, NULL, NULL);
-        send(client_socket, http_header, sizeof(http_header), 0);
+        send(client_socket, http_request, sizeof(http_request), 0);
         close(client_socket);
     }
 
