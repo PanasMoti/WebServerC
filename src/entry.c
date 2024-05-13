@@ -9,6 +9,7 @@
 #include "args.h"
 #include "http_server.h"
 #include "file_utils.h"
+#include "route.h"
 #include <errno.h>
 
 
@@ -17,6 +18,9 @@
 
 
 int main(int argc, char** argv) {
+
+
+
     char root[BUF_SIZE];
     log_args(argc, argv);
     // getting the root directory
@@ -37,6 +41,8 @@ int main(int argc, char** argv) {
     HTTP_Server http_server;
     init_server(&http_server, 8001);
 
+
+    
     int client_socket;
     while (1) {
         client_socket = accept(http_server.socket, NULL, NULL);

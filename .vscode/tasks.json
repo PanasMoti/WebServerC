@@ -12,7 +12,7 @@
         {
             "label": "build",
             "type": "shell",
-            "command": "make",
+            "command": "make all",
             "options": {
                 "cwd": "${workspaceFolder}"
             }
