@@ -33,7 +33,7 @@ char* file_to_string(FILE* fd)
         fprintf(stderr, "cant allocate memory\n");
         return NULL;
     }
-    fgets(str, len, fd);
+    fread(str, sizeof(char), len, fd);
     return str;
 }
 

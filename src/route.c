@@ -44,11 +44,11 @@ struct route *route_search(struct route *root, const char *key)
     }
     else if (strcmp(key, root->key) > 0)
     {
-        return search(root->right, key);
+        return route_search(root->right, key);
     }
     else if (strcmp(key, root->key) < 0)
     {
-        return search(root->left, key);
+        return route_search(root->left, key);
     }
 }
 
